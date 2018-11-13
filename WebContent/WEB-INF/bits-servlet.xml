@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/jsp/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+
+	<context:component-scan
+		base-package="com.bitsbd.controller"></context:component-scan>
+
+	<mvc:annotation-driven></mvc:annotation-driven>
+	<mvc:resources location="/resources/"
+		mapping="/static/**"></mvc:resources>
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="433236" />
+	</bean>
+
+	<context:annotation-config></context:annotation-config>
+
+	<bean id="mailSender"
+		class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="username" value="mhelalk505@gmail.com" />
+		<property name="password" value="hk446283" />
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>
+			</props>
+		</property>
+	</bean>
+
+<!-- 	<bean id="mailSender" -->
+<!-- 		class="org.springframework.mail.javamail.JavaMailSenderImpl"> -->
+<!-- 		<property name="host" value="mail.bits-bd.com" /> -->
+<!-- 		<property name="port" value="587" /> -->
+<!-- 		<property name="username" value="helal@bits-bd.com" /> -->
+<!-- 		<property name="password" value="SB.6EnJnd?zW" /> -->
+<!-- 		<property name="javaMailProperties"> -->
+<!-- 			<props> -->
+<!-- 				<prop key="mail.transport.protocol">smtp</prop> -->
+<!-- 				<prop key="mail.smtp.auth">true</prop> -->
+<!-- 				<prop key="mail.smtp.starttls.enable">true</prop> -->
+<!-- 				<prop key="mail.smtp.ssl.trust">mail.bits-bd.com</prop> -->
+<!-- 			</props> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+
+	
+	
+	
+	
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename" value="com.bitsbd.properties.message"></property>
+		<property name="defaultEncoding" value="UTF-8" />
+    	<property name="cacheSeconds" value="3600"/>
+	</bean>
+</beans>
